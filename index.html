@@ -1,366 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>101DEADS - Zona Apocalíptica Mejorada</title>
+<meta charset="UTF-8">
+<title>101DEADS – Universo Apocalíptico</title>
 
-    <style>
-        body {
-            background: url('https://i.imgur.com/6Y6Qk0U.jpeg') center/cover no-repeat fixed;
-            margin: 0;
-            font-family: "Orbitron", "Impact", sans-serif;
-            background: #050505;
-            color: #e5e5e5;
-            overflow-x: hidden;
-            text-shadow: 0 0 5px black;
-        }
+<style>
+    /* -------------------------- GENERAL -------------------------- */
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0a0c0f url('https://i.imgur.com/U7xTgSj.jpeg') center/cover fixed;
+        color: #e4e4e4;
+        font-family: "Segoe UI", sans-serif;
+        backdrop-filter: blur(2px);
+    }
 
-        /* Fondo nuevo estilo militar/apocalíptico */
-        body::before {
-            content: "";
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: url("https://i.imgur.com/4Z1T8fU.jpeg") center/cover no-repeat;
-            opacity: 0.22;
-            z-index: -5;
-        }
+    .overlay {
+        background: rgba(0,0,0,0.78);
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+    }
 
-        /* textura de suciedad más visible */
-        body::after {
-            content: "";
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url("https://i.imgur.com/eG1L2xU.png") repeat;
-            opacity: 0.18;
-            z-index: -4;
-        }
+    h1, h2 {
+        font-family: "Impact", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 0 0 15px red;
+    }
 
-        /* Niebla mejorada */
-        .fog {
-            position: fixed;
-            top: -200px;
-            left: -200px;
-            width: 160%;
-            height: 160%;
-            background: url("https://i.imgur.com/4OlxAuh.png") repeat;
-            opacity: 0.35;
-            animation: fogMove 60s linear infinite;
-            z-index: -3;
-        }
+    h1 {
+        font-size: 70px;
+        text-align: center;
+        margin-top: 30px;
+        color: #ff2a2a;
+    }
 
-        @keyframes fogMove {
-            0% {
-                transform: translate(0, 0);
-            }
+    /* -------------------------- CONTENEDOR -------------------------- */
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 50px auto;
+        background: rgba(15, 15, 20, 0.75);
+        padding: 30px;
+        color: #dcdcdc;
+        border: 2px solid #ff00004a;
+        border-radius: 10px;
+        box-shadow: 0 0 25px #000;
+        backdrop-filter: blur(4px);
+    }
 
-            100% {
-                transform: translate(-600px, -350px);
-            }
-        }
+    .section {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ff000033;
+    }
 
-        /* Luces de emergencia más intensas */
-        .alarm-red {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.4), transparent 70%);
-            animation: alarmPulse 3s infinite;
-            z-index: -2;
-        }
+    p {
+        line-height: 1.6;
+        font-size: 17px;
+    }
 
-        @keyframes alarmPulse {
-            0% {
-                opacity: 0.20;
-            }
+    .highlight {
+        color: #ff3b3b;
+        font-weight: bold;
+    }
 
-            50% {
-                opacity: 0.55;
-            }
+    /* -------------------------- DECORACIONES -------------------------- */
+    .blood {
+        width: 100%;
+        height: 70px;
+        margin-top: -30px;
+        background: url('https://i.imgur.com/lxnvt3f.png') center/contain no-repeat;
+    }
 
-            100% {
-                opacity: 0.20;
-            }
-        }
+    .panel {
+        background: rgba(20, 20, 20, 0.6);
+        border: 1px solid #ff000033;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px #000;
+    }
 
-        /* HUD militar animado */
-        .hud {
-            position: fixed;
-            top: 15px;
-            right: 20px;
-            font-size: 15px;
-            color: #ff4a4a;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px red;
-            animation: hudScan 2s infinite;
-        }
+    .warning {
+        color: #ff3b3b;
+        font-size: 20px;
+        font-family: Impact;
+        text-shadow: 0 0 10px red;
+    }
 
-        @keyframes hudScan {
-            0% {
-                opacity: 0.65;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0.65;
-            }
-        }
-
-        /* Título con glitch y animación más fluida */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px red, 0 0 30px #ff0000aa;
-            position: relative;
-            animation: glitch 3s infinite;
-        }
-
-        @keyframes glitch {
-            0% {
-                text-shadow: 2px 2px red, -2px -2px #0f0;
-            }
-
-            20% {
-                text-shadow: -2px 0 red, 2px 0 #0f0;
-            }
-
-            40% {
-                text-shadow: 2px -2px red, -2px 2px #0f0;
-            }
-
-            60% {
-                text-shadow: -3px 3px red, 3px -3px #0f0;
-            }
-
-            80% {
-                text-shadow: 1px -1px red, -1px 1px #0f0;
-            }
-
-            100% {
-                text-shadow: 0 0 15px red;
-            }
-        }
-
-        50% {
-            text-shadow: -4px 0 red, 4px 0 #660000;
-        }
-
-        100% {
-            text-shadow: 4px 0 red, -4px 0 #660000;
-        }
-        }
-
-        /* Sangre animada nueva */
-        .sangre {
-            width: 400px;
-            height: 200px;
-            background: url("https://i.imgur.com/4ACcG0G.png") center/contain no-repeat;
-            margin: auto;
-            opacity: 0;
-            transition: 0.4s;
-            margin-top: -20px;
-        }
-
-        h1:hover+.sangre {
-            opacity: 1;
-            transform: translateY(10px);
-        }
-
-        /* Caja principal del texto */
-        .info {
-            max-width: 1000px;
-            margin: auto;
-            margin-top: 40px;
-            background: rgba(10, 10, 10, 0.75);
-            padding: 35px;
-            border-left: 8px solid #8b0000;
-            border-bottom: 8px solid #420000;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-            line-height: 1.9;
-            font-size: 20px;
-        }
-
-        .info h2 {
-            color: #ff2b2b;
-        }
-
-        /* Botón IA mejorado */
-        .boton-ia {
-            position: fixed;
-            bottom: 35px;
-            right: 35px;
-            background: linear-gradient(45deg, #b30000, #ff1a1a);
-            padding: 20px 30px;
-            font-size: 22px;
-            border: none;
-            cursor: pointer;
-            color: white;
-            border-radius: 18px;
-            letter-spacing: 1px;
-            box-shadow: 0 0 18px red;
-            transition: 0.25s;
-        }
-
-        .boton-ia:hover {
-            transform: scale(1.12);
-            box-shadow: 0 0 35px #ff0000;
-        }
-
-        /* --- ESTILOS MEJORADOS APOCALÍPTICOS --- */
-        body {
-            background: black;
-            font-family: 'Orbitron', sans-serif;
-            color: #d6ffd6;
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 255, 100, 0.06);
-            backdrop-filter: blur(2px);
-            pointer-events: none;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.imgur.com/fE9zFQa.png');
-            opacity: 0.15;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            letter-spacing: 3px;
-            margin-top: 25px;
-            text-shadow: 0 0 12px #00ff80, 0 0 25px #00cc66;
-            transition: 0.3s;
-        }
-
-        h1:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 30px #00ff80, 0 0 55px #00ffcc;
-        }
-
-        .content-box {
-            background: rgba(10, 20, 10, 0.72);
-            padding: 22px;
-            margin: 20px auto;
-            width: 85%;
-            border-radius: 14px;
-            box-shadow: 0 0 25px #003d1e inset, 0 0 12px #00994d;
-            border: 2px solid rgba(0, 255, 100, 0.3);
-            animation: fadeIn 0.6s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        button {
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #0aff6a, #006b2e);
-            color: #001b0e;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.25s;
-            box-shadow: 0 0 12px #00ff80;
-        }
-
-        button:hover {
-            transform: scale(1.07);
-            box-shadow: 0 0 22px #00ffaa;
-        }
-
-        button:active {
-            transform: scale(0.94);
-        }
-    </style>
+</style>
 </head>
-
 <body>
 
-    <div class="fog"></div>
-    <div class="alarm-red"></div>
-    <div class="hud">[ SISTEMA MILITAR: ZONA ROJA - CONTAMINACIÓN NIVEL 4 ]</div>
+<div class="overlay"></div>
 
-    <h1>101DEADS</h1>
-    <div class="sangre"></div>
+<h1>101DEADS</h1>
+<div class="blood"></div>
 
-    <div class="info">
-        <h2>Bienvenido al Mundo en Ruinas</h2>
-        <p>
-            Tras décadas de experimentación biológica clandestina, la humanidad cayó víctima de su propia ambición. La
-            máquina RV8‑9, diseñada originalmente como un recurso militar para "revivir" soldados caídos, terminó
-            liberando una plaga imposible de contener.
-        </p>
-        <p>
-            Las ciudades se convirtieron en zonas muertas, los bosques quedaron infestados, los supervivientes se
-            esconden entre escombros y los no‑vivos vagan devorando lo que queda del mundo.
-        </p>
+<div class="container">
 
-        <h2>¡Esto No Es Un Simulacro!</h2>
+    <!-- HISTORIA -->
+    <div class="section">
+        <h2>El Inicio del Horror</h2>
+        <div class="panel">
         <p>
-            - Bases militares destruidas.
-            <br>
-            - Alarmas sonando sin control.
-            <br>
-            - Luces rojas marcando zonas peligrosas.
-            <br>
-            - Niebla tóxica recorriendo el ambiente.
-            <br>
-            - Criaturas que jamás debieron existir se reproducen en la oscuridad.
-        </p>
-
-        <h2>Historia Extendida</h2>
-        <p>
-            El virus creado por la RV8‑9 no solo reanima cuerpos, sino que altera sus sistemas nerviosos, creando
-            variantes impredecibles y extremadamente agresivas. Algunos mantienen reflejos humanos; otros corren como
-            bestias salvajes; otros simplemente gritan y se arrastran, consumidos por el dolor.
+            Todo comenzó con la <span class="highlight">Máquina RV8-9</span>, un dispositivo nazi desarrollado por la organización secreta S.N.N.
+            Su propósito era simple: <span class="highlight">revivir cadáveres</span> para convertirlos en soldados obedientes.
+            La guerra terminó, pero la máquina no. Fue ocultada, olvidada… hasta 1955, cuando el científico 
+            <span class="highlight">Lukas Schneider</span> la redescubrió.
         </p>
         <p>
-            Los sobrevivientes han formado pequeñas facciones, intentando comprender el origen del brote y localizar los
-            restos del laboratorio principal donde inició todo. La culpa, el miedo y el misterio dominan el mundo.
+            Fascinado por su poder, Schneider llevó la máquina a Vietnam del Norte, donde se realizaron experimentos prohibidos.
+            Algo salió mal: la máquina comenzó a revivir cuerpos defectuosos, inestables, agresivos.
+            Aquellos primeros especímenes fueron llamados <span class="highlight">Muertos Fallidos</span>.
         </p>
+        </div>
     </div>
 
-    <button class="boton-ia" onclick="window.location.href='helpia.html'">
-        Asistente IA
-    </button>
+    <!-- BROTE -->
+    <div class="section">
+        <h2>El Brote</h2>
+        <div class="panel">
+        <p>
+            En una noche marcada por un apagón total, la RV8-9 activó sus sistemas por sí sola.
+            Los cuerpos almacenados comenzaron a despertar uno tras otro…
+            <span class="highlight">101 sujetos</span> revivieron simultáneamente.
+        </p>
+        <p>
+            No obedecían. No pensaban. Solo <span class="highlight">mataban</span>.
+            Para cuando las autoridades llegaron, encontraron el laboratorio cubierto de sangre, los muros arañados y
+            la máquina completamente desaparecida.
+        </p>
+        <p class="warning">A partir de ese día, comenzó el fin del mundo.</p>
+        </div>
+    </div>
+
+    <!-- EL MUNDO -->
+    <div class="section">
+        <h2>Un Mundo en Ruinas</h2>
+        <div class="panel">
+        <p>
+            El virus necrobioeléctrico de la máquina se expandió sin control.
+            Pueblos enteros cayeron. Ciudades se convirtieron en cementerios.
+        </p>
+        <p>
+            Los pocos sobrevivientes luchan entre:
+        </p>
+        <ul>
+            <li>Cadenas de zombis que evolucionan rápidamente</li>
+            <li>Milicias que buscan controlar la RV8-9</li>
+            <li>Restos de experimentos fallidos con mutaciones extremas</li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- ENEMIGOS -->
+    <div class="section">
+        <h2>Enemigos</h2>
+        <div class="panel">
+        <p><span class="highlight">Zombis Comunes:</span> rápidos, agresivos y siempre en hordas.</p>
+        <p><span class="highlight">Fallidos:</span> inestables, saltan, gritan y pueden romper estructuras débiles.</p>
+        <p><span class="highlight">Exhumados:</span> zombis extremadamente resistentes revividos más de una vez.</p>
+        <p><span class="highlight">El Sujeto Nº 101:</span> la criatura más peligrosa creada por la RV8-9.</p>
+        </div>
+    </div>
+
+    <!-- PROTAGONISTAS -->
+    <div class="section">
+        <h2>Los Sobrevivientes</h2>
+        <div class="panel">
+        <p>
+            En el caos del apocalipsis, cuatro sobrevivientes se mantienen unidos:
+        </p>
+        <ul>
+            <li><span class="highlight">Alex Hunter:</span> ex-soldado con conocimiento táctico.</li>
+            <li><span class="highlight">Brandon Price:</span> mecánico experto en crear armas improvisadas.</li>
+            <li><span class="highlight">Ethan Cole:</span> francotirador silencioso y preciso.</li>
+            <li><span class="highlight">Liam Ward:</span> médico que busca revertir los efectos de la RV8-9.</li>
+        </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>La Lucha Continúa</h2>
+        <div class="panel">
+        <p>
+            El objetivo es simple: <span class="highlight">sobrevivir</span>.  
+        </p>
+        <p class="warning">
+            El fin ya comenzó.  
+            Solo tú puedes evitar que el mundo sea consumido por los muertos.
+        </p>
+        </div>
+    </div>
+
+</div>
 
 </body>
-
 </html>
